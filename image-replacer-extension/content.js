@@ -61,6 +61,14 @@ async function swapFaces(img) {
 }
 function swap(img) {
   if (!active || img.classList.contains(MARK) || img.dataset.mememytabPending || !visible(img)) return;
+  // Sites such as Google hydrate thumbnails after inserting the <img>. Wait for the real source first.
+  if (!img.complete || !img.naturalWidth) {
+    if (img.dataset.mememytabWaiting) return;
+    img.dataset.mememytabWaiting = "1";
+    const retry = () => { delete img.dataset.mememytabWaiting; swap(img); };
+    img.addEventListener("load", retry, { once: true }); img.addEventListener("error", () => delete img.dataset.mememytabWaiting, { once: true });
+    return;
+  }
   img.dataset.mememytabPending = "1";
   const next = choose(), preload = new Image();
   preload.onload = () => { if (!active || !img.isConnected) return; img.dataset.mememytabOriginal = img.currentSrc || img.src; img.dataset.mememytabSrcset = img.getAttribute("srcset") || ""; img.removeAttribute("srcset"); img.removeAttribute("sizes"); img.src = next; img.classList.add(MARK); img.style.setProperty("object-fit", "cover", "important"); img.style.setProperty("outline", "2px solid #ff5f8f", "important"); img.style.setProperty("outline-offset", "-2px", "important"); delete img.dataset.mememytabPending; pop(img); };
@@ -81,4 +89,4 @@ function schedule() { if (!active || queued) return; queued = true; requestAnima
 const style = document.createElement("style"); style.textContent = "@keyframes mememytab-reveal{from{opacity:.15;transform:scale(.985)}to{opacity:1;transform:scale(1)}}.mememytab-reveal{animation:mememytab-reveal .16s ease-out both!important}"; document.documentElement.append(style);
 chrome.runtime.onMessage.addListener((m, _s, reply) => { if (m.type === "MEME_MY_TAB") { setState(m.enabled, m.photos, m.mode); reply({ ok: true, faceDetectionAvailable: !!getFaceDetector() }); } });
 chrome.storage.local.get({ mememytabEnabled: false, mememytabPhotos: [], mememytabMode: "super" }, s => setState(s.mememytabEnabled, s.mememytabPhotos, s.mememytabMode));
-new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true }); addEventListener("scroll", schedule, true); addEventListener("resize", schedule); addEventListener("load", schedule, true);
+new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ["src", "srcset", "data-src"] }); addEventListener("scroll", schedule, true); addEventListener("resize", schedule); addEventListener("load", schedule, true);

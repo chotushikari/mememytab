@@ -2,7 +2,7 @@
 
 > Your friend. Every image. Zero explanation needed.
 
-## [↓ Download MemeMyTab](https://github.com/chotushikari/mememytab/raw/refs/heads/main/downloads/MemeMyTab-v6.zip)
+## [↓ Download MemeMyTab](https://github.com/chotushikari/mememytab/raw/refs/heads/main/downloads/MemeMyTab-v7.zip)
 
 Unzip → open `chrome://extensions` → enable **Developer mode** → **Load unpacked** → pick `image-replacer-extension`.
 
