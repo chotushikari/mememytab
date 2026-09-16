@@ -2,7 +2,7 @@
 
 > Your friend. Every image. Zero explanation needed.
 
-## [↓ Download MemeMyTab](https://github.com/chotushikari/mememytab/raw/refs/heads/main/downloads/MemeMyTab-v5.zip)
+## [↓ Download MemeMyTab](https://github.com/chotushikari/mememytab/raw/refs/heads/main/downloads/MemeMyTab-v6.zip)
 
 Unzip → open `chrome://extensions` → enable **Developer mode** → **Load unpacked** → pick `image-replacer-extension`.
 
@@ -18,7 +18,7 @@ Unzip → open `chrome://extensions` → enable **Developer mode** → **Load un
 
 ## Under the hood
 
-No AI. No server. No background worker. No tracking.
+No paid AI. No server. No background worker. No tracking. Face mode uses Chrome's local FaceDetector when the browser exposes it.
 
 MemeMyTab changes image sources in the tab, watches for lazy-loaded images, and scans as you scroll. Photos stay in Chrome's local storage. That is the whole trick.
 
