@@ -8,7 +8,7 @@ function render() {
   note.textContent = state.mememytabPhotos.length ? `${state.mememytabPhotos.length} custom photos ready.` : "2 starter photos ready.";
   deck.innerHTML = cards.map((src, i) => `<button class="thumb" ${state.mememytabPhotos.length ? `data-x="${i}"` : "disabled"}><img src="${src}" alt="Photo ${i + 1}">${state.mememytabPhotos.length ? "×" : ""}</button>`).join("");
   modeNote.textContent = faceMode ? "subtle" : "maximum chaos";
-  modeHelp.textContent = faceMode ? "Swaps profile pictures, display photos, and avatar-shaped images." : "Swaps every visible image, background, and video post with the uploaded deck.";
+  modeHelp.textContent = faceMode ? "Swaps portrait cards and profile photos. Icons, logos, and tiny site UI stay untouched." : "Swaps every visible image, background, and video post with the uploaded deck.";
   document.querySelectorAll(".mode").forEach(button => { const selected = button.dataset.mode === state.mememytabMode; button.classList.toggle("selected", selected); button.setAttribute("aria-checked", selected); button.onclick = async () => { state.mememytabMode = button.dataset.mode; await save(); }; });
   document.querySelectorAll("[data-x]").forEach(button => button.onclick = async () => { state.mememytabPhotos.splice(+button.dataset.x, 1); await save(); });
 }

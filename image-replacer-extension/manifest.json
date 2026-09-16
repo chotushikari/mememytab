@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MemeMyTab",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Turn every scroll into an inside joke.",
   "permissions": ["storage", "tabs"],
   "action": { "default_popup": "popup.html", "default_title": "MemeMyTab" },
