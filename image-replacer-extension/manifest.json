@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "MemeMyTab",
+  "version": "2.0.0",
+  "description": "Turn every scroll into an inside joke.",
+  "permissions": ["storage", "tabs"],
+  "action": { "default_popup": "popup.html", "default_title": "MemeMyTab" },
+  "content_scripts": [{ "matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_idle" }],
+  "icons": { "16": "assets/icon.png", "32": "assets/icon.png", "48": "assets/icon.png", "128": "assets/icon.png" },
+  "web_accessible_resources": [{ "resources": ["assets/starter/manas-1.jpg", "assets/starter/manas-2.jpg"], "matches": ["<all_urls>"] }]
+}
